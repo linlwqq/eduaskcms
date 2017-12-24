@@ -1,0 +1,77 @@
+{extends file='../global.html'}
+{block name=global}
+<!--[if lt IE 10]> 
+<p style="text-align: center;padding-top:100px;">请使用高版本浏览器进入后台管理（建议浏览器：Firefox、Chrome）</p>
+<p><a href="http://www.firefox.com.cn/">下载Firefox浏览器</a></p>
+<p><a href="http://www.google.cn/chrome/browser//">下载Chrome浏览器</a></p>
+<div style="display:none">
+<![endif]--> 
+
+<div id="canvas" >   
+    <div id="Banner" class="layui-carousel">
+        <div carousel-item> 
+            <div><a class="coverBg" style="background-image: url({$absroot}images/admin/f9fa4d5b4fc10ba2209f2489bd0e7e15.jpg);"></a></div>
+            <div><a class="coverBg" style="background-image: url({$absroot}images/admin/44661ede2d8c7e19be8ff811841f24be.jpg);"></a></div>
+        </div>
+    </div> 
+</div>
+<div id="login">
+    <h1>
+		 <strong><span class="en-font">{$dev.cms_title}</span>管理系统后台</strong>
+		 <em class="en-font">Management System</em>
+	</h1>
+    {$form->create(['type'=>'post'])}
+    <div class="user info">
+        <label>U</label>
+        {$form->text("User.username",['class'=>'en-font','placeholder'=>'账号','autocomplete'=>'off'])}
+    </div>
+    <div class="pwd info">
+        <label>P</label>
+        {$form->password("User.password",['class'=>'en-font','placeholder'=>'密码','autocomplete'=>'off'])}
+    </div>
+    <div class="code info">
+        <label>V</label>
+        {$form->text("captcha",['class'=>'en-font',name=>'captcha','value'=>'','autocomplete'=>'off','placeholder'=>'验证码'])}
+        <span class="vimg"><img  src="{captcha_src()}" class="tooltip" onclick="this.src='{captcha_src()}?'+Math.random()"/></span>
+    </div>
+    <div class="sub">
+        <input  type="submit" value="立即登录"/>
+    </div>
+    {$form->end()}
+    <div class="copy">{$dev.cms_copyright}</div>
+</div>
+
+<script type="text/javascript">
+layui.use(['layer', 'carousel'],function(){
+    'use strict';
+    var layer=layui.layer;
+    
+    {if $error}
+    layer.msg('{$error}');
+    {/if}
+    
+    
+    var carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+        elem: '#Banner'
+        ,width: '100%' //设置容器宽度
+        ,height:'100%'
+        ,arrow: 'none' //始终显示箭头
+        ,anim: 'fade' //切换动画方式
+    });
+});
+
+$(window).resize(function(){
+    var wh  = $(window).height();
+    $('#canvas').height(wh);
+    
+}).trigger('resize')
+
+
+
+</script>
+<!--[if lt IE 8]>
+	</div>
+<![endif]--> 
+{/block}

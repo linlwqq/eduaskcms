@@ -1,0 +1,5 @@
+<?php
+
+//require 'public' . DIRECTORY_SEPARATOR . 'index.php';
+header('Location:public/');
+
